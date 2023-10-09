@@ -1,0 +1,17 @@
+BootStrap: docker
+From: nvidia/cuda:11.5.1-cudnn8-devel-ubuntu20.04
+
+%post
+    apt update -y
+    apt install -y python3.8
+    apt update -y
+    apt install -y pip
+    apt update -y
+    pip install numpy==1.21.6
+    pip install torch==1.13.0
+    pip install torchvision==0.14.0
+
+%environment
+   export LC_ALL=C
+
+%runscript
