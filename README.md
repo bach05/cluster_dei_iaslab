@@ -65,7 +65,20 @@ cd /nfsd/iaslab4/Users/your_surname
 ```
 If the folder with your surname does not exist, please create it. 
 
-Clone your repository with the code. Copy also the `.sif` image container in the repository folder (rembeer to update `.gitingore` file). 
+Clone your repository with the code. Copy also the `.sif` image container in the repository folder (rembeer to update `.gitignore` file). 
+
+## Cpoy file into your workspae folder
+
+If you are inside DEI network, you can access the NAS through the file manager using samba. Please, refer to the following image:
+
+![Alt text](./images/nas_access.png)
+
+If you are outside DEI network, use `scp` (`-r` will recursevely copy all the subfolders):
+
+```shell
+scp -r /path_to_resource ursername@login.dei.unipd.it:/nfsd/iaslab4/Users/your_surname/
+
+```
 
 # Manage a job
 
