@@ -23,7 +23,7 @@ For deep learning with Pytorch, you can rely on this example file `ubuntu_cuda.d
 
 ```
 BootStrap: docker
-From: nvidia/cuda:11.5.1-cudnn8-devel-ubuntu20.04
+From: nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
 
 %post
     apt update -y
@@ -50,6 +50,21 @@ Build the image
 
 There are also other modalities, please refer to this [guide](https://guiesbibtic.upf.edu/recerca/hpc/building-singularity-containers). 
 
+### Note
+The image in the example (nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04) is old but working.
+<br>
+If you need another image, you can refer to the complete list at [Nvidia hub](https://hub.docker.com/r/nvidia/cuda/tags?).
+
+
+### Troubleshooting
+ - If you get stuck during image building at the choice of Geographic area, in particular during "Configuring tzdata", just paste the following lines immediately after the "From: ..." command
+    ```
+    export TZ=Europe/Rome
+    RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+    ```
+   and re-build
+
+
 
 # Prepare the cluster environment in the cluster
 
@@ -63,11 +78,18 @@ In your home you have only 5GB, if you need more space, you should access our NA
 ```shell
 cd /nfsd/iaslab4/Users/your_surname
 ```
-If the folder with your surname does not exist, please create it. 
+If the folder with your surname does not exist, please create it.
+
+> <u>Note</u>: you may have the permissions to create the folder, thus you can do this by yourself.<br>
+But if you happen to not have the permissions, you need to open a ticket [here](https://www.dei.unipd.it/helpdesk/index.php).<br>
+You will found it easier in the <u>italian version</u> (the english version lacks some options).<br>
+After login, go to "pagina iniziale">"Cluster calcolo dipartimentali (Blade/Razor)"<br>
+In the "Riassunto" field write "Accesso al NAS"<br>
+In the body of the ticket, ask for the creation of the folder with your surname at the specific path and the permission to work on it.
 
 Clone your repository with the code. Copy also the `.sif` image container in the repository folder (rembeer to update `.gitignore` file). 
 
-## Cpoy file into your workspae folder
+## Copy file into your workspace folder
 
 If you are inside DEI network, you can access the NAS through the file manager using samba. Please, refer to the following image:
 
@@ -78,6 +100,16 @@ If you are outside DEI network, use `scp` (`-r` will recursevely copy all the su
 ```shell
 scp -r /path_to_resource ursername@login.dei.unipd.it:/nfsd/iaslab4/Users/your_surname/
 
+```
+
+# Test a job locally
+
+You can test the job locally by placing repo and .sif in the same folder.
+
+#### In this example we mount the data folder and the code folder in two different places. Then, we run a python script passing also an argument that the script wants.
+
+```
+sudo singularity exec --bind [dataset path]:/data,[code path]:/mnt --pwd /mnt [sif name].sif --nv python3 train.py -d /data
 ```
 
 # Manage a job
@@ -109,6 +141,12 @@ Please substitute [] with your specs.
 
 Note the all the path by default refers to your `/home` directory. We use `--bind /nfsd/iaslab4/Users/[your_folder]/[your_repo]:/mnt` to simplfy the mapping. `/mnt` now is pseudonym for `/nfsd/iaslab4/Users/[your_folder]/[your_repo]`. All the path in your code must start with `/mnt`, otherwise the they will refer to `/home`. 
 
+The `--nv` option is fundamental for enabling the nvidia enviroment, thus the usage of the gpu.
+
+| Notable Slurm Fields | comment | example | meaning | 
+| --- | --- | --- | --- | 
+| -t [expected execution time] | different time formats are available (see [here](https://clusterdeiguide.readthedocs.io/en/latest/UsingSLURM.html#slurm-mandatory-options)) | t 05-03 | run for 5 days, 3 hours | 
+| --gres=gpu:[required gpu] |  you must specify the [type](https://clusterdeiguide.readthedocs.io/en/latest/SLURMExamples.html#gpu-job) of the gpu that you want. | --gres=gpu:rtx |  use a single RTX gpu |
 ## Submit the job
 
 To submit your job: 
