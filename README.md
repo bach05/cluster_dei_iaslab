@@ -47,6 +47,10 @@ Build the image
 ```
  singularity build ubuntu_cuda.sif ubuntu_cuda.def
 ```
+Build the image with `sudo` commands in the `.def`:
+```
+ singularity build --fakeroot ubuntu_cuda.sif ubuntu_cuda.def
+```
 
 There are also other modalities, please refer to this [guide](https://guiesbibtic.upf.edu/recerca/hpc/building-singularity-containers). 
 
