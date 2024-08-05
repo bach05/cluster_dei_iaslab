@@ -161,17 +161,17 @@ To get info about your job status, running time, etc..., you can also run:
 squeue -o "%.18i %.24j %.8u %.2t %.12M %.6D %.12l %.3C %.5m %.7b %R" | grep gpu
 ```
 Here a legend of the command: 
-- %.18i : Job ID
-- %.24j : Job name
-- %.8u : User name
-- %.2t : Job state
-- %.10M : Time used by the job
-- %.6D : Number of nodes
-- %.10l : Time limit set by the user
-- %.3C : Number of CPUs requested
-- %.6m : Minimum memory required
-- %R : Node list (or reason the job is pending)
-- %.10b : Job features (including GPUs)
+- `%.18i` : Job ID
+- `%.24j` : Job name
+- `%.8u` : User name
+- `%.2t` : Job state
+- `%.10M` : Time used by the job
+- `%.6D` : Number of nodes
+- `%.10l` : Time limit set by the user
+- `%.3C` : Number of CPUs requested
+- `%.6m` : Minimum memory required
+- `%R` : Node list (or reason the job is pending)
+- `%.10b` : Job features (including GPUs)
 
 Some status codes inlcude: 
 - `COMPLETED CD`: 	The job has completed successfully.
