@@ -19,11 +19,11 @@ mkdir image
 cd image
 ```
 
-For deep learning with Pytorch, you can rely on this example file `ubuntu_cuda.def`. It builds an Ubuntu 20.04 container with cuda libraries. Add `pip install ...` to install the packages you need. 
+For deep learning with Pytorch, you can rely on this example file `ubuntu_cuda.def`. It builds an Ubuntu 22.04 container with cuda 11.8 libraries (you can look for a different version in [Docker Hub](https://hub.docker.com/r/nvidia/cuda/tags) ). Add `pip install ...` to install the packages you need. 
 
 ```
 BootStrap: docker
-From: nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
+From: nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 
 %post
     apt update -y
