@@ -105,6 +105,11 @@ If you are outside DEI network, use `scp` (`-r` will recursevely copy all the su
 scp -r /path_to_resource ursername@login.dei.unipd.it:/nfsd/iaslab4/Users/your_surname/
 
 ```
+### Mount a remote file system with GUI
+```shell
+mkdir ~/remote_cluster
+sshfs -o ServerAliveInterval=60 youraccount@login.dei.unipd.it:/nfsd/iaslab4/Users/your_surname ~/remote_cluster
+```
 
 # Test a job locally
 
