@@ -51,6 +51,10 @@ Build the image with `sudo` commands in the `.def`:
 ```
  singularity build --fakeroot ubuntu_cuda.sif ubuntu_cuda.def
 ```
+After building successfully:
+```
+ singularity cache clean -all
+```
 
 There are also other modalities, please refer to this [guide](https://guiesbibtic.upf.edu/recerca/hpc/building-singularity-containers). 
 
@@ -67,12 +71,6 @@ If you need another image, you can refer to the complete list at [Nvidia hub](ht
     RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
     ```
    and re-build
-
-After compiling:
-```
- singularity cache clean -all
-```
-
 
 # Prepare the cluster environment in the cluster
 
