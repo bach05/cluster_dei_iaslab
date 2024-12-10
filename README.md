@@ -68,6 +68,10 @@ If you need another image, you can refer to the complete list at [Nvidia hub](ht
     ```
    and re-build
 
+After compiling:
+```
+ singularity cache clean -all
+```
 
 
 # Prepare the cluster environment in the cluster
